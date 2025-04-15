@@ -13,7 +13,7 @@ public class Prodotto {
     // costruttore
     public Prodotto(String nome, String descrizione, double prezzoBase, int iva) {
         Random random = new Random();
-        this.codice = random.nextInt(1000);
+        this.codice = random.nextInt(9999);
         this.nome = nome;
         this.descrizione = descrizione;
         this.prezzoBase = prezzoBase;
@@ -21,14 +21,20 @@ public class Prodotto {
     }
 
     public double getPrezzoBase() {
-        return prezzoBase;
+        return this.prezzoBase;
     }
 
     public double getPrezzoIvato() {
-        return prezzoBase + (prezzoBase * iva / 100);
+        if (this.prezzoBase <= 0) {
+            return 0;
+        } else if (this.iva <= 0) {
+            return this.prezzoBase;
+        } else {
+            return this.prezzoBase + (this.prezzoBase * this.iva / 100);
+        }
     }
 
     public String getFullName() {
-        return codice + "-" + nome;
+        return this.codice + "-" + this.nome;
     }
 }
